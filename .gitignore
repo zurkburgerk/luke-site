@@ -48,3 +48,9 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# DB
+/luke-site.db
+
+# Uploaded media
+/public/models/*
