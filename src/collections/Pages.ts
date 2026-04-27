@@ -1,4 +1,3 @@
-// src/collections/Pages.ts
 import { CollectionConfig } from 'payload'
 import { lexicalEditor, BlocksFeature } from '@payloadcms/richtext-lexical'
 import { ModelBlock } from '@/blocks/ModelBlock/config'
