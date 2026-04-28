@@ -23,7 +23,7 @@ export function ModelPreview({ url, height = 300 }: Props) {
         <directionalLight position={[5, 10, 5]} intensity={4} />
         <directionalLight position={[-5, 5, -5]} intensity={2} />
         <Suspense fallback={null}>
-          <AnimatedModel url={url} autoRotate fadeIn />
+          <AnimatedModel url={url} autoRotate fadeIn mouseTrackX />
         </Suspense>
       </Canvas>
     </div>

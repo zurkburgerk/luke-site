@@ -62,21 +62,13 @@ export default async function ProjectPage({ params }: Args) {
 
       <div className="project-page__hero">
         {modelUrl && (
-          <ModelCanvas
-            url={modelUrl}
-            autoRotate
-            fadeIn
-            transition="fromRight"
-            height={500}
-          />
+          <ModelCanvas url={modelUrl} autoRotate fadeIn transition="fromLeft" height={500} />
         )}
       </div>
 
       <div className="project-page__info">
         <h1 className="project-page__title">{project.title}</h1>
-        {project.year && (
-          <span className="project-page__year">{project.year}</span>
-        )}
+        {project.year && <span className="project-page__year">{project.year}</span>}
       </div>
 
       {project.content && (

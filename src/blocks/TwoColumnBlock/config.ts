@@ -1,4 +1,5 @@
 import { Block } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const TwoColumnBlock: Block = {
   slug: 'twoColumnBlock',
@@ -9,11 +10,13 @@ export const TwoColumnBlock: Block = {
   fields: [
     {
       name: 'left',
-      type: 'json',
+      type: 'richText',
+      editor: lexicalEditor({}),
     },
     {
       name: 'right',
-      type: 'json',
+      type: 'richText',
+      editor: lexicalEditor({}),
     },
   ],
 }

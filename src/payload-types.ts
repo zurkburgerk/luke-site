@@ -201,6 +201,8 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Upload GLB or GLTF files only. Do not upload other file types.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "models".
  */

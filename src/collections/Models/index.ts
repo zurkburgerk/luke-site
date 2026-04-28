@@ -29,4 +29,7 @@ export const Models: CollectionConfig = {
 	upload: {
 		staticDir: 'public/models',
 	},
+	admin: {
+		description: 'Upload GLB or GLTF files only. Do not upload other file types.',
+	},
 }
