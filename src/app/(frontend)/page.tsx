@@ -1,5 +1,3 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import { ProjectGrid } from '@/components/ProjectGrid'
 import type { Metadata } from 'next'
 
@@ -8,18 +6,10 @@ export const metadata: Metadata = {
   description: 'Product design portfolio showcasing innovative 3D printed designs.',
 }
 
-export default async function HomePage() {
-  const payload = await getPayload({ config })
-
-  const { docs: projects } = await payload.find({
-    collection: 'projects',
-    sort: ['order', 'createdAt'],
-    pagination: false,
-  })
-
+export default function HomePage() {
   return (
     <div className="home">
-      <ProjectGrid projects={projects} />
+      <ProjectGrid />
     </div>
   )
 }

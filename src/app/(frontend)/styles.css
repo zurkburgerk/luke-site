@@ -116,6 +116,12 @@ a {
   padding: 2rem;
 }
 
+.project-grid__loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--foreground-muted);
+}
+
 .project-grid__cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -1,15 +1,29 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ProjectCard } from '@/components/ProjectCard'
 import type { Project } from '@/payload-types'
+import { getProjects } from '@/app/(frontend)/actions'
 
-type Props = {
-  projects: Project[]
-}
+export function ProjectGrid() {
+  const [projects, setProjects] = useState<Project[]>([])
+  const [hoveredId, setHoveredId] = useState<number | null>(null)
+  const [loading, setLoading] = useState(true)
 
-export function ProjectGrid({ projects }: Props) {
-  const [hoveredId, setHovered] = useState<number | null>(null)
+  useEffect(() => {
+    getProjects().then((data: Project[]) => {
+      setProjects(data)
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="project-grid">
+        <div className="project-grid__loading">Loading...</div>
+      </div>
+    )
+  }
 
   return (
     <div className="project-grid">
@@ -19,7 +33,7 @@ export function ProjectGrid({ projects }: Props) {
             key={project.id}
             project={project}
             isHovered={project.id === hoveredId}
-            onHover={setHovered}
+            onHover={setHoveredId}
           />
         ))}
       </div>
