@@ -1,71 +1,321 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff;
-  --foreground: black;
+  --background: #fafafa;
+  --foreground: #111;
+  --foreground-muted: #666;
+  --header-height: 80px;
+  --grid-gap: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-main);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+  padding: 0 2rem;
+  background-color: var(--background);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header__name {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+
+.header__name:hover {
+  opacity: 0.6;
+}
+
+.header__nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.header__link {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--foreground-muted);
+  transition: color 0.2s ease;
+}
+
+.header__link:hover {
   color: var(--foreground);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-main);
-  font-weight: bold;
+/* Main content */
+.main {
+  min-height: calc(100vh - var(--header-height));
 }
 
-@layer base {
-  p {
-    font-size: 1.1rem; /* text-xl equivalent */
-    line-height: 1.75rem;
-  }
+/* Footer */
+.footer {
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
 
-  h1 {
-    font-size: 3rem;
-    line-height: 1.2;
-    font-weight: bold;
-  }
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  h2 {
-    font-size: 2.25rem;
-    line-height: 1.2;
-    font-weight: bold;
-  }
+.footer__copy {
+  font-size: 0.75rem;
+  color: var(--foreground-muted);
+}
 
-  h3 {
-    font-size: 1.875rem;
-    line-height: 1.2;
-    font-weight: bold;
-  }
+.footer__links {
+  display: flex;
+  gap: 1.5rem;
+}
 
-  h4 {
-    font-size: 1.5rem;
-    line-height: 1.2;
-    font-weight: bold;
-  }
+.footer__link {
+  font-size: 0.75rem;
+  color: var(--foreground-muted);
+  transition: color 0.2s ease;
+}
 
-  h5 {
-    font-size: 1.25rem;
-    line-height: 1.2;
-    font-weight: bold;
-  }
+.footer__link:hover {
+  color: var(--foreground);
+}
 
-  h6 {
-    font-size: 1.125rem;
-    line-height: 1.2;
-    font-weight: bold;
+/* Project Grid */
+.project-grid {
+  padding: 2rem;
+}
+
+.project-grid__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap);
+}
+
+/* Project Card */
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  height: 280px;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.project-card__content {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.project-card--hovered .project-card__content {
+  display: none;
+}
+
+.project-card__title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.project-card__year {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--foreground-muted);
+}
+
+.project-card__model {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card--hovered .project-card__model {
+  opacity: 1;
+}
+
+/* Model Preview */
+.model-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.model-preview canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Two Column Block */
+.two-column-block {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.two-column-block__left {
+  grid-column: span 6;
+}
+
+.two-column-block__right {
+  grid-column: span 6;
+}
+
+@media (max-width: 768px) {
+  .two-column-block__left,
+  .two-column-block__right {
+    grid-column: span 12;
   }
 }
 
-@layer components {
-  ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
+/* Project Page */
+.project-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-page__back {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  color: var(--foreground-muted);
+  transition: color 0.2s ease;
+}
+
+.project-page__back:hover {
+  color: var(--foreground);
+}
+
+.project-page__hero {
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  margin-bottom: 3rem;
+}
+
+.project-page__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-page__title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.project-page__year {
+  font-size: 1rem;
+  color: var(--foreground-muted);
+}
+
+.project-page__description {
+  font-size: 1.125rem;
+  color: var(--foreground-muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
   }
 
-  li {
-    margin-bottom: 0.5rem;
+  .header__link {
+    font-size: 0.75rem;
+  }
+
+  .project-grid {
+    padding: 1rem;
+  }
+
+  .project-grid__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .project-page {
+    padding: 1rem;
+  }
+
+  .project-page__hero {
+    height: 50vh;
+    min-height: 300px;
+  }
+
+  .project-page__title {
+    font-size: 1.75rem;
   }
 }
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-card {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.project-card:nth-child(1) { animation-delay: 0s; }
+.project-card:nth-child(2) { animation-delay: 0.1s; }
+.project-card:nth-child(3) { animation-delay: 0.2s; }
+.project-card:nth-child(4) { animation-delay: 0.3s; }
+.project-card:nth-child(5) { animation-delay: 0.4s; }
+.project-card:nth-child(6) { animation-delay: 0.5s; }

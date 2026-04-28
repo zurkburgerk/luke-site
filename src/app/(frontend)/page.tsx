@@ -1,19 +1,25 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
 import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
-
 import config from '@/payload.config'
-import './styles.css'
+import { ProjectGrid } from '@/components/ProjectGrid'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Luke Rathunde | Product Design',
+  description: 'Product design portfolio showcasing innovative 3D printed designs.',
+}
 
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+  const payload = await getPayload({ config })
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  const { docs: projects } = await payload.find({
+    collection: 'projects',
+    sort: ['order', 'createdAt'],
+    pagination: false,
+  })
 
-  return <div className="home"></div>
+  return (
+    <div className="home">
+      <ProjectGrid projects={projects} />
+    </div>
+  )
 }

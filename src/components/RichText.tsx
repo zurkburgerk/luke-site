@@ -3,6 +3,7 @@ import {
   type JSXConvertersFunction,
 } from '@payloadcms/richtext-lexical/react'
 import { ModelBlockComponent } from '@/blocks/ModelBlock/Component'
+import { TwoColumnBlockComponent } from '@/blocks/TwoColumnBlock/Component'
 import { SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import { Model } from '@/payload-types'
 
@@ -14,6 +15,13 @@ type ModelBlock = {
   fadeIn?: boolean
   trackMouse?: boolean
   blockType: 'modelBlock'
+  id?: string
+}
+
+type TwoColumnBlock = {
+  left: unknown
+  right: unknown
+  blockType: 'twoColumnBlock'
   id?: string
 }
 
@@ -31,6 +39,9 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
         fadeIn={node.fields.fadeIn}
         trackMouse={node.fields.trackMouse}
       />
+    ),
+    twoColumnBlock: ({ node }: { node: SerializedBlockNode<TwoColumnBlock> }) => (
+      <TwoColumnBlockComponent key={node.fields.id} node={node} />
     ),
   },
 })
