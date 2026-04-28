@@ -1,17 +1,13 @@
-'use client'
-
 export function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="footer">
       <div className="footer__content">
-        <p className="footer__copy">
-          &copy; {year} Luke Rathunde. All rights reserved.
-        </p>
+        <p className="footer__copy">&copy; {year} Luke Rathunde. All rights reserved.</p>
         <div className="footer__links">
           <a
-            href="https://linkedin.com"
+            href="https://linkedin.com/in/luke-rathunde-54694a403"
             target="_blank"
             rel="noopener noreferrer"
             className="footer__link"
