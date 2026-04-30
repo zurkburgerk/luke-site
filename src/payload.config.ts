@@ -1,5 +1,6 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -39,6 +40,19 @@ export default buildConfig({
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || '',
+    },
+  }),
+  email: nodemailerAdapter({
+    defaultFromAddress: 'noreply@thunde.net',
+    defaultFromName: 'THUNDE - WebAdmin Notifications',
+    // Nodemailer transportOptions
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: 587,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     },
   }),
   sharp,
