@@ -12,7 +12,7 @@ export const Users: CollectionConfig = {
       },
       generateEmailHTML: ({ token }) => {
         const publicUrl = process.env.PAYLOAD_PUBLIC_SERVER_URL
-        const verifyURL = `${publicUrl}/admin/verify/${token}`
+        const verifyURL = `${publicUrl}/admin/users/verify/${token}`
         return `
           <!DOCTYPE html>
           <html>
