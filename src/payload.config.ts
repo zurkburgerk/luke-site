@@ -44,7 +44,7 @@ export default buildConfig({
   }),
   email: nodemailerAdapter({
     defaultFromAddress: 'noreply@thunde.net',
-    defaultFromName: 'THUNDE - WebAdmin Notifications',
+    defaultFromName: 'THUNDE - Web Admin Notifications',
     // Nodemailer transportOptions
     transportOptions: {
       host: process.env.SMTP_HOST,
